@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VGS</title>
+</head>
+<body>
+
+<h3>VGS credit card</h3>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<form id="form_id" action="/app/add" method="POST">
+    {% csrf_token %}
+    <label for="cc_number">Credit Card Number </label>
+    <input type="text" name="cc_number" id="cc_number" value="" />
+    <br>
+    
+    <label for="cc_number">Credit Card Exp </label>
+    <input type="text" name="cc_exp" id="cc_exp" value="" />
+    <br>
+
+    <label for="cc_number">Credit Card CVV </label>
+    <input type="text" name="cc_cvv" id="cc_cvv" value="" />
+    <br>
+    <input type="submit" value="Add" />
+</form>
+
+{% if pii_data_list %}
+    {% for piiData in pii_data_list %}
+    <li>
+        <p>Credit Card Number: {{ piiData.cc_number}}</p>
+        <p>Expiration: {{ piiData.cc_exp}}</p>
+	<p>CVV: {{ piiData.cc_cvv}}</p>
+        <a href="/app/{{ piiData.id }}/">Original data</a>
+    </li>
+    {% endfor %}
+{% endif %}
+
+</body>
+</html>

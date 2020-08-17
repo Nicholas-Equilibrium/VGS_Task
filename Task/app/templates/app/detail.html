@@ -1,0 +1,34 @@
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+<br>
+<h3>Original data</h3>
+<p><label for="date">Date:</label> <label id="date"></label></p>
+<p><label for="cc_number">CC_Number:</label> <label id="cc_number"></label></p>
+<p><label for="cc_exp">CC_Exp:</label> <label id="cc_exp"></label></p>
+<p><label for="cc_cvv">CC_CVV:</label> <label id="cc_cvv"></label></p>
+<button onclick="checkrRun()">Echo data</button>
+<br><br>
+<a href="/app/">Back</a>
+<br><br><br>
+
+<script>
+    function checkrRun() {
+        $.get('{{ host }}/app/echo/server/{{pii_data.id}}/',
+              function onSuccess(data){
+                
+              }
+        )
+    }
+
+     function fillOutPage(){
+        $.get('{{ host }}/app/vgs/return/{{pii_data.id}}/',
+              function onSuccess(data){
+                  $("#date").text(data.pub_date);
+                  $("#cc_number").text(data.cc_number);
+                  $("#cc_exp").text(data.cc_exp);
+                  $("#cc_cvv").text(data.cc_cvv);
+              }
+        )
+    }
+    window.onload = fillOutPage;
+</script>

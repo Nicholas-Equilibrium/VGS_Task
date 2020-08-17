@@ -1,0 +1,12 @@
+server {
+   listen       8001;
+   server_name  build-proxy-port;
+
+   location / {
+       proxy_pass ${DJANGO_APP_URL};
+   }
+
+   location ~ ^/(app/add|app/vgs/return/) {
+       proxy_pass ${INBOUND_ROUTE};
+   }
+}
